@@ -1,6 +1,6 @@
 //
 //  UnconfiguredExternalAccessory.swift
-//  WACTest
+//  CombineExternalAccessory
 //
 //  Created by Luis Reisewitz on 06.08.20.
 //  Copyright © 2020 Lautsprecher Teufel GmbH. All rights reserved.
@@ -18,14 +18,13 @@ public struct UnconfiguredExternalAccessory {
     let browser = EAWiFiUnconfiguredAccessoryBrowser()
     let accessory: EAWiFiUnconfiguredAccessory
 
-    // TODO: [COMBINE]: convert to promise later with foundationextension
     /// - Warning: This completes the browser's search process and terminates the `Publisher`.
-    public func configure(on viewController: UIViewController) -> AnyPublisher<Void, ConfigurationError> {
+    public func configure(on viewController: UIViewController) -> UnconfiguredExternalAccessoryPublisher {
         return UnconfiguredExternalAccessoryPublisher(
             browser: browser,
             accessory: accessory,
             viewController: viewController
-        ).eraseToAnyPublisher()
+        )
     }
 
     /// The reason why a configuration for a device can be unsuccessful.
@@ -51,9 +50,9 @@ extension UnconfiguredExternalAccessory: Hashable {
     }
 }
 
-private struct UnconfiguredExternalAccessoryPublisher: Publisher {
-    typealias Output = Void
-    typealias Failure = UnconfiguredExternalAccessory.ConfigurationError
+public struct UnconfiguredExternalAccessoryPublisher: Publisher {
+    public typealias Output = Never
+    public typealias Failure = UnconfiguredExternalAccessory.ConfigurationError
 
     private let browser: EAWiFiUnconfiguredAccessoryBrowser
     private let accessory: EAWiFiUnconfiguredAccessory
@@ -65,7 +64,7 @@ private struct UnconfiguredExternalAccessoryPublisher: Publisher {
         self.viewController = viewController
     }
 
-    func receive<S>(subscriber: S) where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
+    public func receive<S>(subscriber: S) where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
         let subscription = UnconfiguredExternalAccessory.Subscription(
             subscriber: subscriber,
             browser: browser,

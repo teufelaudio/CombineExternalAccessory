@@ -1,6 +1,6 @@
 //
 //  UnconfiguredExternalAccessoryBrowser.swift
-//  WACTest
+//  CombineExternalAccessory
 //
 //  Created by Luis Reisewitz on 05.08.20.
 //  Copyright © 2020 Lautsprecher Teufel GmbH. All rights reserved.

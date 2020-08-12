@@ -16,7 +16,7 @@ public struct UnconfiguredExternalAccessory {
     /// Switching the delegate of the existing Browser used for discovering devices would hang the discovery
     /// Publisher.
     let browser = EAWiFiUnconfiguredAccessoryBrowser()
-    let accessory: EAWiFiUnconfiguredAccessory
+    public let accessory: EAWiFiUnconfiguredAccessory
 
     /// - Warning: This completes the browser's search process and terminates the `Publisher`.
     public func configure(on viewController: UIViewController) -> UnconfiguredExternalAccessoryPublisher {

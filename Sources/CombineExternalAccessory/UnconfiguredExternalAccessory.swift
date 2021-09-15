@@ -12,6 +12,11 @@ import Foundation
 import UIKit
 
 public struct UnconfiguredExternalAccessory {
+
+    public init(accessory: EAWiFiUnconfiguredAccessory) {
+        self.accessory = accessory
+    }
+
     /// Browser to use for configuring. We create a new one here, as we need to set the delegate.
     /// Switching the delegate of the existing Browser used for discovering devices would hang the discovery
     /// Publisher.

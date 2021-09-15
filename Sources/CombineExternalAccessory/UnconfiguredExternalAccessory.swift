@@ -16,21 +16,7 @@ public struct UnconfiguredExternalAccessory {
     public init(accessory: EAWiFiUnconfiguredAccessory) {
         self.accessory = accessory
     }
-
-    /// Browser to use for configuring. We create a new one here, as we need to set the delegate.
-    /// Switching the delegate of the existing Browser used for discovering devices would hang the discovery
-    /// Publisher.
-    let browser = EAWiFiUnconfiguredAccessoryBrowser()
     public let accessory: EAWiFiUnconfiguredAccessory
-
-    /// - Warning: This completes the browser's search process and terminates the `Publisher`.
-    public func configure(on viewController: UIViewController) -> UnconfiguredExternalAccessoryPublisher {
-        return UnconfiguredExternalAccessoryPublisher(
-            browser: browser,
-            accessory: accessory,
-            viewController: viewController
-        )
-    }
 
     /// The reason why a configuration for a device can be unsuccessful.
     public enum ConfigurationError: Error {
@@ -63,9 +49,9 @@ public struct UnconfiguredExternalAccessoryPublisher: Publisher {
     private let accessory: EAWiFiUnconfiguredAccessory
     private let viewController: UIViewController
 
-    init(browser: EAWiFiUnconfiguredAccessoryBrowser, accessory: EAWiFiUnconfiguredAccessory, viewController: UIViewController) {
+    public init(browser: EAWiFiUnconfiguredAccessoryBrowser, unconfiguredExternalAccessory: UnconfiguredExternalAccessory, viewController: UIViewController) {
         self.browser = browser
-        self.accessory = accessory
+        self.accessory = unconfiguredExternalAccessory.accessory
         self.viewController = viewController
     }
 

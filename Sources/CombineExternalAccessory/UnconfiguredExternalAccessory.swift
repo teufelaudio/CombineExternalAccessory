@@ -127,7 +127,7 @@ extension UnconfiguredExternalAccessory {
                 // `EAWiFiUnconfiguredAccessoryBrowser` is basically a singleton.
                 // We will receive events here for all actions that are done on any
                 // browser we use in our app. To make sure that this event is actually
-                // for us (this accessory), we compare the accessories.
+                // for us (this accessory), we compare the accessories' macAddress.
                 guard let `self` = self,
                       self.unconfiguredExternalAccessory.accessory?.macAddress == accessory.macAddress
                 else { return }

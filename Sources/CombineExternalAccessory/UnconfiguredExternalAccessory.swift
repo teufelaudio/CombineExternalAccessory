@@ -69,6 +69,8 @@ extension UnconfiguredExternalAccessory: Equatable {
 }
 
 // MARK: - Hashable
+extension EAWiFiUnconfiguredAccessoryProperties: Hashable {}
+
 extension UnconfiguredExternalAccessory: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
@@ -76,6 +78,7 @@ extension UnconfiguredExternalAccessory: Hashable {
         hasher.combine(model)
         hasher.combine(ssid)
         hasher.combine(macAddress)
+        hasher.combine(properties)
     }
 }
 

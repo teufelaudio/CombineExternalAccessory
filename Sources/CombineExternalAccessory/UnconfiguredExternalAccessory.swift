@@ -59,12 +59,12 @@ public struct UnconfiguredExternalAccessory {
 // MARK: - Equatable
 extension UnconfiguredExternalAccessory: Equatable {
     public static func ==(lhs: UnconfiguredExternalAccessory, rhs: UnconfiguredExternalAccessory) -> Bool {
-        lhs.name == lhs.name &&
-        lhs.manufacturer == lhs.manufacturer &&
-        lhs.model == lhs.model &&
-        lhs.ssid == lhs.ssid &&
-        lhs.macAddress == lhs.macAddress &&
-        lhs.properties == lhs.properties
+        lhs.name == rhs.name &&
+        lhs.manufacturer == rhs.manufacturer &&
+        lhs.model == rhs.model &&
+        lhs.ssid == rhs.ssid &&
+        lhs.macAddress == rhs.macAddress &&
+        lhs.properties == rhs.properties
     }
 }
 

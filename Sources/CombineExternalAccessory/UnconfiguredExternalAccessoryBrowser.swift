@@ -31,11 +31,14 @@ public struct UnconfiguredExternalAccessoryBrowserType: Publisher {
 
 public class UnconfiguredExternalAccessoryBrowser {
     private let predicate: NSPredicate?
+    private let browser: EAWiFiUnconfiguredAccessoryBrowser
 
     public init(
-        predicate: NSPredicate? = nil
+        predicate: NSPredicate? = nil,
+        browser: EAWiFiUnconfiguredAccessoryBrowser
     ) {
         self.predicate = predicate
+        self.browser = browser
     }
 }
 
@@ -44,7 +47,7 @@ extension UnconfiguredExternalAccessoryBrowser: Publisher {
     public typealias Failure = Error
 
     public func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
-        let subscription = Subscription(subscriber: subscriber, predicate: predicate)
+        let subscription = Subscription(subscriber: subscriber, predicate: predicate, browser: browser)
         subscriber.receive(subscription: subscription)
     }
 }
@@ -59,8 +62,8 @@ extension UnconfiguredExternalAccessoryBrowser {
         /// Delegate that is used for the browser to notify us about changes.
         private let browserDelegate = BrowserDelegate()
 
-        init(subscriber: SubscriberType, predicate: NSPredicate?) {
-            self.browser = EAWiFiUnconfiguredAccessoryBrowser()
+        init(subscriber: SubscriberType, predicate: NSPredicate?, browser: EAWiFiUnconfiguredAccessoryBrowser) {
+            self.browser = browser
             self.predicate = predicate
 
             super.init(subscriber: subscriber)

@@ -82,6 +82,14 @@ extension UnconfiguredExternalAccessory: Hashable {
     }
 }
 
+// MARK: - Identifiable
+
+extension UnconfiguredExternalAccessory: Identifiable {
+    public var id: String {
+        macAddress
+    }
+}
+
 public struct UnconfiguredExternalAccessoryPublisher: Publisher {
     public typealias Output = Never
     public typealias Failure = UnconfiguredExternalAccessory.ConfigurationError

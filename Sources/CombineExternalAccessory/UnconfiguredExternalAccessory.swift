@@ -83,10 +83,15 @@ extension UnconfiguredExternalAccessory: Hashable {
 }
 
 // MARK: - Identifiable
-
 extension UnconfiguredExternalAccessory: Identifiable {
     public var id: String {
         macAddress
+    }
+}
+
+extension UnconfiguredExternalAccessory {
+    public static var empty: UnconfiguredExternalAccessory {
+        .init(name: "", manufacturer: "", model: "", ssid: "", macAddress: "", properties: .propertySupportsAirPlay)
     }
 }
 
